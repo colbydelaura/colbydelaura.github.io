@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colby DeLaura — Mechanical Engineering Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --white:#FFFFFF;
+    --ink:#0B0B0C;
+    --ink-2:#1C1C1E;
+    --gold:#B8912F;
+    --gold-bright:#D4AF37;
+    --gold-dim:#8C6D1F;
+    --graphite:#54534C;
+    --paper-2:#F6F5F2;
+    --line:#E3E1D9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--gold); color:var(--ink);}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .serif{font-family:'Newsreader', serif;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  section, header, footer{scroll-margin-top:76px;}
+
+  /* ---------- Nav ---------- */
+  .navbar{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid var(--gold-dim);
+  }
+  .nav-inner{
+    max-width:1180px; margin:0 auto; padding:16px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .nav-brand{font-family:'Newsreader',serif; font-weight:600; font-size:18px; letter-spacing:.01em; color:var(--white); white-space:nowrap;}
+  .nav-brand span{color:var(--gold);}
+  .nav-links{display:flex; gap:2px; overflow-x:auto; scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.04em;
+    color:#B9B9B6; text-decoration:none; white-space:nowrap;
+    padding:8px 10px; border-radius:2px; transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--gold);}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--ink); color:var(--white); padding:72px 24px 0;}
+  .hero-inner{max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1.5fr 1fr; gap:48px; align-items:end;}
+  @media (max-width:820px){ .hero-inner{grid-template-columns:1fr;} }
+  .hero-portrait{position:relative;}
+  .hero-portrait .frame{margin-bottom:0; border-color:var(--gold-dim); aspect-ratio:3/4;}
+  .hero-portrait .caption{color:#9E9D97; margin-top:10px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.16em;
+    color:var(--gold); text-transform:uppercase; margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:'Newsreader',serif; font-weight:600; font-style:italic;
+    font-size:clamp(42px, 8vw, 84px); line-height:0.98; margin:0 0 22px; letter-spacing:-0.01em;
+  }
+  .hero .lede{font-size:16.5px; line-height:1.65; color:#CFCFC9; max-width:54ch; margin:0 0 44px;}
+
+  .tb-row{
+    border-top:1px solid var(--gold-dim);
+    display:grid; grid-template-columns:repeat(4,1fr);
+  }
+  .tb-cell{padding:18px 22px; border-right:1px solid rgba(184,145,47,0.35);}
+  .tb-cell:last-child{border-right:none;}
+  .tb-cell .k{display:block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.1em; color:var(--gold); margin-bottom:6px;}
+  .tb-cell .v{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--white);}
+  @media (max-width:760px){
+    .tb-row{grid-template-columns:1fr 1fr;}
+    .tb-cell{border-bottom:1px solid rgba(184,145,47,0.35);}
+  }
+
+  /* ---------- Divider (section header band) ---------- */
+  .divider{background:var(--ink); color:var(--white); padding:36px 24px;}
+  .divider-inner{
+    max-width:1180px; margin:0 auto;
+    display:flex; align-items:baseline; gap:22px; flex-wrap:wrap;
+  }
+  .divider-no{
+    font-family:'Newsreader',serif; font-style:italic; font-weight:600;
+    font-size:15px; color:var(--gold); border:1px solid var(--gold-dim);
+    padding:5px 12px; border-radius:100px; letter-spacing:.02em;
+  }
+  .divider h2{
+    font-family:'Newsreader',serif; font-weight:600; font-size:clamp(24px,3.6vw,36px);
+    margin:0; letter-spacing:-0.01em;
+  }
+  .divider-tag{
+    margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:11px; color:#CFCFC9;
+    border:1px solid rgba(184,145,47,0.4); padding:5px 12px; border-radius:100px; white-space:nowrap;
+  }
+
+  /* ---------- Sheet body ---------- */
+  .sheet{max-width:1180px; margin:0 auto; padding:56px 24px 80px;}
+
+  .sheet-grid{display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:start;}
+  .sheet-grid.reverse .col-media{order:2;}
+  .sheet-grid.reverse .col-text{order:1;}
+  @media (max-width:860px){
+    .sheet-grid{grid-template-columns:1fr;}
+    .sheet-grid.reverse .col-media, .sheet-grid.reverse .col-text{order:initial;}
+  }
+
+  .specs{
+    display:flex; flex-wrap:wrap; border:1px solid var(--ink); margin-bottom:24px; background:var(--paper-2);
+  }
+  .spec{flex:1; min-width:150px; padding:12px 16px; border-right:1px solid var(--line);}
+  .spec:last-child{border-right:none;}
+  .spec .k{display:block; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.08em; color:var(--gold-dim); margin-bottom:4px;}
+  .spec .v{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink); font-weight:500;}
+
+  .body-copy p{font-size:15.5px; line-height:1.75; color:var(--ink); margin:0 0 18px;}
+  .body-copy p:last-child{margin-bottom:0;}
+
+  .notes{margin-top:26px; border-left:2px solid var(--gold); padding-left:18px;}
+  .notes .notes-label{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; color:var(--gold-dim);
+    text-transform:uppercase; margin-bottom:12px; display:block;
+  }
+  .notes ul{margin:0; padding:0; list-style:none;}
+  .notes li{font-size:14px; line-height:1.6; color:var(--graphite); margin-bottom:10px; padding-left:22px; position:relative;}
+  .notes li:last-child{margin-bottom:0;}
+  .notes li::before{content:"—"; position:absolute; left:0; top:0; color:var(--gold); font-weight:600;}
+
+  /* media frames — fixed aspect ratio, gold corner ticks */
+  .frame{position:relative; margin-bottom:10px; overflow:hidden; background:var(--paper-2); border:1px solid var(--ink);}
+  .frame img, .frame video{display:block; width:100%; height:100%; object-fit:cover;}
+  .ar-landscape{aspect-ratio:3/2;}
+  .ar-portrait{aspect-ratio:3/4;}
+  .ar-wide{aspect-ratio:4/3;}
+  .ar-video{aspect-ratio:9/16; max-width:340px; margin-left:auto; margin-right:auto;}
+  .frame .tick{position:absolute; width:16px; height:16px; pointer-events:none; z-index:2;}
+  .frame .tick.tl{top:8px; left:8px; border-top:2px solid var(--gold); border-left:2px solid var(--gold);}
+  .frame .tick.tr{top:8px; right:8px; border-top:2px solid var(--gold); border-right:2px solid var(--gold);}
+  .frame .tick.bl{bottom:8px; left:8px; border-bottom:2px solid var(--gold); border-left:2px solid var(--gold);}
+  .frame .tick.br{bottom:8px; right:8px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold);}
+
+  .caption{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--graphite); margin:0 0 8px; line-height:1.5;}
+  .caption .no{color:var(--gold-dim); margin-right:6px;}
+
+  .media-pair{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:8px;}
+  @media (max-width:560px){.media-pair{grid-template-columns:1fr;}}
+  .media-block{margin-bottom:8px;}
+  .media-block + .media-block{margin-top:32px;}
+
+  .statblock{
+    border:1px solid var(--ink); background:var(--ink); color:var(--white); padding:28px 30px; margin:30px 0;
+    display:flex; align-items:center; gap:26px; flex-wrap:wrap;
+  }
+  .statblock .num{font-family:'Newsreader',serif; font-weight:600; font-style:italic; font-size:36px; color:var(--gold); line-height:1; white-space:nowrap;}
+  .statblock .desc{font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#CFCFC9; line-height:1.6; max-width:36ch;}
+
+  .sub-divider{display:flex; align-items:center; gap:14px; margin:48px 0 24px;}
+  .sub-divider .line{flex:1; height:1px; background:var(--line);}
+  .sub-divider span{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; color:var(--gold-dim); text-transform:uppercase; white-space:nowrap;}
+
+  .china-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:20px;}
+  @media (max-width:860px){.china-grid{grid-template-columns:repeat(2,1fr);}}
+
+  .fab-grid{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--ink);}
+  .fab-cell{padding:30px 32px; background:var(--paper-2);}
+  .fab-cell + .fab-cell{border-left:1px solid var(--ink);}
+  @media (max-width:720px){
+    .fab-grid{grid-template-columns:1fr;}
+    .fab-cell + .fab-cell{border-left:none; border-top:1px solid var(--ink);}
+  }
+  .fab-cell h3{font-family:'Newsreader',serif; font-weight:600; font-size:20px; margin:0 0 4px;}
+  .fab-cell .fab-org{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--gold-dim); margin-bottom:14px; display:block;}
+  .fab-cell p{font-size:14.5px; line-height:1.68; color:var(--graphite); margin:0;}
+
+  /* footer */
+  footer{background:var(--ink); color:var(--white); padding:72px 24px 40px;}
+  .signoff{max-width:1180px; margin:0 auto; display:flex; justify-content:space-between; align-items:flex-end; gap:28px; flex-wrap:wrap; padding-bottom:44px; border-bottom:1px solid var(--gold-dim);}
+  .signoff h2{font-family:'Newsreader',serif; font-weight:600; font-style:italic; font-size:clamp(28px,3.6vw,40px); margin:0 0 12px;}
+  .signoff p{font-size:14.5px; color:#CFCFC9; margin:0; max-width:44ch; line-height:1.65;}
+  .signoff-links{display:flex; flex-direction:column; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:13px;}
+  .signoff-links a{text-decoration:none; color:var(--gold); border-bottom:1px solid var(--gold-dim); padding-bottom:3px; transition:color .2s, border-color .2s;}
+  .signoff-links a:hover{color:var(--white); border-color:var(--white);}
+  .foot-meta{
+    max-width:1180px; margin:22px auto 0; display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#8A8A85; flex-wrap:wrap; gap:8px;
+  }
+
+  video{background:#000;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">DELAURA<span>.</span></div>
+    <div class="nav-links">
+      <a href="#falco">01 FALCO</a>
+      <a href="#drone">02 CARGO DRONE</a>
+      <a href="#articon">03 ARTICON</a>
+      <a href="#tarc">04 TARC</a>
+      <a href="#bubble">05 BUBBLE MACHINE</a>
+      <a href="#fab">06 FABRICATION</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow reveal">Mechanical Engineering — Portfolio</p>
+      <h1 class="reveal">Colby DeLaura</h1>
+      <p class="lede reveal">B.S. Mechanical Engineering, UCLA. I build the thing, break the thing, and write down what it took to fix it — from a 3D‑printed rocket motor mount in high school to a cold‑weather UAS frame today.</p>
+    </div>
+    <div class="hero-portrait reveal">
+      <div class="frame ar-portrait">
+        <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+        <img src="images/colby-headshot.jpg" alt="Portrait of Colby DeLaura">
+      </div>
+      <p class="caption mono">C. DELAURA — UCLA MECHANICAL ENGINEERING</p>
+    </div>
+  </div>
+  <div class="tb-row reveal">
+    <div class="tb-cell"><span class="k">SCHOOL</span><span class="v">UCLA · Exp. 2028</span></div>
+    <div class="tb-cell"><span class="k">STRUCTURES</span><span class="v">FALCO / Baja / SAE</span></div>
+    <div class="tb-cell"><span class="k">MECHATRONICS</span><span class="v">Cargo Drone / Bubble Mach.</span></div>
+    <div class="tb-cell"><span class="k">SOFTWARE</span><span class="v">SolidWorks · Fusion360 · FEA</span></div>
+  </div>
+</header>
+
+<!-- 01 FALCO -->
+<section id="falco">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">01</span>
+      <h2>FALCO — UAS Structural Frame</h2>
+      <span class="divider-tag">Cleared for public release</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-grid reveal">
+      <div class="col-media">
+        <div class="frame ar-landscape">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/falco-cad.jpg" alt="SolidWorks model of the FALCO single-piece drone frame, showing the body and four arms">
+        </div>
+        <p class="caption"><span class="no">FIG. 01</span>FALCO_Frame_1 — single-piece body, modeled in SolidWorks.</p>
+      </div>
+      <div class="col-text">
+        <div class="specs">
+          <div class="spec"><span class="k">ORG</span><span class="v">U.S. Navy Dept. of War — UAS Dev. (Volunteer)</span></div>
+          <div class="spec"><span class="k">MATERIAL</span><span class="v">TPU (over PLA)</span></div>
+          <div class="spec"><span class="k">TEMP RANGE</span><span class="v">−40°F to −22°F</span></div>
+        </div>
+        <div class="body-copy">
+          <p>FALCO is a drone designed to be 3D‑printed at overseas bases in extreme environments — cold, wind, and rough field conditions, with Mongolia as the target case. My job was the body: a single‑piece frame that fits a 290×290×290mm printer envelope and can be built and repaired by field personnel with no engineering background.</p>
+          <p>The one‑piece constraint mattered as much as the strength constraint — every joint is a failure point in a shed at −40°F. I used SolidWorks to work out the geometry and space claims for every component that had to mount to it, while teammates ran FEA to compare candidate materials. TPU's elasticity over PLA's stiffness was the deciding factor: PLA gets brittle and cracks in the cold, TPU flexes and survives it.</p>
+        </div>
+        <div class="notes">
+          <span class="notes-label">Design constraints solved</span>
+          <ul>
+            <li>Fits inside a 290×290×290mm print volume, no assembly required</li>
+            <li>Single piece — no fasteners or joints to fail in the field</li>
+            <li>Material selected for elasticity at −40°F to −22°F, not just strength</li>
+            <li>Space claimed for every mounted component before printing, not after</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 CARGO DRONE -->
+<section id="drone">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">02</span>
+      <h2>Cargo Drone — Autonomous Payload Delivery</h2>
+      <span class="divider-tag">UCLA ENGR 1 DR</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="reveal">
+      <div class="specs">
+        <div class="spec"><span class="k">ROLE</span><span class="v">Structure, electronics, controls</span></div>
+        <div class="spec"><span class="k">DURATION</span><span class="v">1 quarter</span></div>
+        <div class="spec"><span class="k">OUTCOME</span><span class="v">Target hit — consistently accurate</span></div>
+      </div>
+      <div class="body-copy">
+        <p>The brief was open: build a drone that finds a target and drops a payload on it. My team decided to make it entirely ours — a fully 3D‑printed fuselage instead of a kit frame, our own aftermarket motors (twice the power of what UCLA provided, since we were carrying four golf‑ball payloads instead of nothing), and a lattice‑structured body to keep weight down without giving up strength. I soldered all of the electronics myself, and wrote the Python computer‑vision pipeline — running on a Raspberry Pi camera module — that found an orange target and triggered four servos to release the payload.</p>
+      </div>
+    </div>
+
+    <div class="media-block reveal">
+      <div class="media-pair">
+        <div>
+          <div class="frame ar-portrait">
+            <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+            <img src="images/drone-build.jpg" alt="Close-up of the drone's electronics and wiring, fully assembled with lattice-structured arms">
+          </div>
+          <p class="caption"><span class="no">FIG. 02</span>Final assembly — hand‑soldered wiring, lattice arms.</p>
+        </div>
+        <div>
+          <div class="frame ar-portrait">
+            <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+            <img src="images/drone-crash.jpg" alt="The drone after a crash, with three of four arms broken off and landing gear damaged">
+          </div>
+          <p class="caption"><span class="no">FIG. 03</span>T‑minus 1 day — 3 of 4 arms and 2 landing gears gone.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="media-block reveal">
+      <div class="media-pair">
+        <div>
+          <div class="frame ar-video">
+            <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+            <video controls preload="metadata" poster="media/drone-flight-poster.jpg"><source src="media/drone-flight.mp4" type="video/mp4"></video>
+          </div>
+          <p class="caption"><span class="no">FIG. 04</span>Final flight day — payload mechanism live.</p>
+        </div>
+        <div>
+          <div class="frame ar-video">
+            <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+            <video controls preload="metadata" poster="media/drone-code-poster.jpg"><source src="media/drone-code-working.mp4" type="video/mp4"></video>
+          </div>
+          <p class="caption"><span class="no">FIG. 05</span>The CV target‑recognition code, finally working.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes reveal" style="margin-top:40px;">
+      <span class="notes-label">Punch list — what actually went wrong</span>
+      <ul>
+        <li>ESC‑to‑motor signal imbalance, traced and corrected before flight</li>
+        <li>Target‑recognition code missed the mark repeatedly — rebuilt with heavy AI‑assisted debugging until it worked</li>
+        <li>Crashed a day before launch, breaking 3 arms and 2 landing gears — repaired overnight, launched one day late</li>
+        <li>Caught a voltage mismatch between ordered electronics and the PDU before it fried anything, fixed with converters</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 03 ARTICON -->
+<section id="articon">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">03</span>
+      <h2>Articon USA — Mechanical Engineer, Intern</h2>
+      <span class="divider-tag">Jun – Sep 2026</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="reveal">
+      <div class="specs">
+        <div class="spec"><span class="k">FOCUS</span><span class="v">Metal AM systems, CNC service, data pipeline</span></div>
+        <div class="spec"><span class="k">TOOLS</span><span class="v">SolidWorks, Python, Asiga, imes‑icore</span></div>
+      </div>
+      <div class="body-copy">
+        <p>One of our head engineers was building an AI‑powered diagnostic system for our CNC machines — effectively an always‑on check‑engine light, sensing anomalies in real time from current, vibration, pressure, and temperature and reporting them to a shared database. My job was the data behind it: a Python program that logged everything about each milling job — start/finish time, duration, material, tool type and condition, workpiece, operation, and outcome — into a CSV the AI agent could train on.</p>
+      </div>
+    </div>
+
+    <div class="statblock reveal">
+      <div class="num">2:04 → 0:30</div>
+      <div class="desc">TIME TO MANUALLY LOG 10 MILLING JOBS, BEFORE VS. AFTER THE AUTOMATED PROGRAM — MEASURED BY TIMING MYSELF ON BOTH.</div>
+    </div>
+
+    <div class="body-copy reveal">
+      <p>Outside the data work, I serviced the machines themselves — traveling on-site with our head engineer to diagnose imes‑icore mills at client facilities like Glidewell, and running point on Asiga printer support tickets: remote‑coaching clients through fixes, or handling repairs myself when it came in‑house (replaced an LCD screen once after a client didn't mention the display's power connection had failed).</p>
+    </div>
+
+    <div class="sub-divider reveal">
+      <span>China — HBD Partnership Training</span>
+      <div class="line"></div>
+    </div>
+
+    <div class="body-copy reveal">
+      <p>A month into the internship, I was sent to China for technical training on HBD's 150‑series metal 3D printers — Articon is HBD's first U.S. partner, so the trip mattered. One of our clients required a U.S. citizen on-site per their contract, and our office is mostly Russian nationals — so as the only U.S. citizen and strong English speaker on the trip, I ended up doing double duty: completing the two‑day technical training, and acting as the translator/facilitator between my Russian colleague and the Chinese HBD team whenever the language barrier got in the way of business.</p>
+    </div>
+
+    <div class="china-grid reveal">
+      <div>
+        <div class="frame ar-portrait">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/china-hbd-machine.jpg" alt="Colby and a colleague standing with an HBD metal 3D printer, wearing hard hats and masks">
+        </div>
+        <p class="caption"><span class="no">FIG. 06</span>On the HBD factory floor.</p>
+      </div>
+      <div>
+        <div class="frame ar-wide">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/china-welcome.jpg" alt="Welcome signage for the Articon visitors at the HBD facility">
+        </div>
+        <p class="caption"><span class="no">FIG. 07</span>Welcome signage, HBD facility.</p>
+      </div>
+      <div>
+        <div class="frame ar-portrait">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/china-certificate.jpg" alt="Certificate of completion for the HBD Dental Metal 3D Printer Technical Training Course">
+        </div>
+        <p class="caption"><span class="no">FIG. 08</span>Training completion certificate.</p>
+      </div>
+      <div>
+        <div class="frame ar-wide">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/china-group.jpg" alt="Group photo with the HBD team after training">
+        </div>
+        <p class="caption"><span class="no">FIG. 09</span>With the HBD team, post‑training.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 TARC -->
+<section id="tarc">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">04</span>
+      <h2>TARC — Competition Rocket</h2>
+      <span class="divider-tag">High School · 2nd, Regional Qualifiers</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-grid reverse reveal">
+      <div class="col-text">
+        <div class="specs">
+          <div class="spec"><span class="k">SCHOOL</span><span class="v">Capistrano Valley HS</span></div>
+          <div class="spec"><span class="k">ROLE</span><span class="v">Co‑Team Lead (with Spencer)</span></div>
+          <div class="spec"><span class="k">TARGET</span><span class="v">1,000 ft / 90s, egg intact</span></div>
+        </div>
+        <div class="body-copy">
+          <p>Co‑led a team of six through the Team America Rocketry Challenge — delegating design tasks, overseeing the full build, and running launch‑day data collection. Spencer and I split the rocket in half and each owned a side; I had the bottom half — motor mount, fins, and fuselage.</p>
+          <p>The rocket came out heavier than the school‑issued Class C motor could handle well, so I made the case to move up to a Class D motor instead of redesigning around the weight. That meant re‑solving the motor mount: I went through trial and error on the 3D‑printed chamber dimensions until the fit was snug enough to hold under thrust but loose enough to remove — my first real lesson in why tolerance is its own design problem, not an afterthought.</p>
+        </div>
+      </div>
+      <div class="col-media">
+        <div class="frame ar-portrait">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/tarc-rocket.jpg" alt="The finished TARC competition rocket, held up next to its assembly instructions">
+        </div>
+        <p class="caption"><span class="no">FIG. 10</span>Finished rocket, Class D motor fitted.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 BUBBLE MACHINE -->
+<section id="bubble">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">05</span>
+      <h2>Automatic Bubble Machine</h2>
+      <span class="divider-tag">High School · Senior Year, Fall 2023</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="sheet-grid reveal">
+      <div class="col-media">
+        <div class="frame ar-portrait">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <img src="images/bubble-controller.jpg" alt="The hand-wired Arduino controller for the bubble machine, held in a hand">
+        </div>
+        <p class="caption"><span class="no">FIG. 11</span>Arduino controller, wired by hand.</p>
+      </div>
+      <div class="col-text">
+        <div class="specs">
+          <div class="spec"><span class="k">SCHOOL</span><span class="v">Capistrano Valley HS</span></div>
+          <div class="spec"><span class="k">GOAL</span><span class="v">Continuous bubbles, one‑knob operation</span></div>
+          <div class="spec"><span class="k">TOOLS</span><span class="v">OnShape, Fusion360, Arduino</span></div>
+        </div>
+        <div class="body-copy">
+          <p>Built with a small team before I'd ever touched a real engineering class — the goal was a bubble machine that ran continuously off a single nozzle turn, no manual dipping or wanding. We 3D‑printed the frame in OnShape and Fusion360 and built an Arduino‑based controller, powered off a battery pack, to drive the mechanism.</p>
+        </div>
+        <div class="frame ar-video" style="margin-top:24px;">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <video controls preload="metadata" poster="media/bubble-machine-poster.jpg"><source src="media/bubble-machine.mp4" type="video/mp4"></video>
+        </div>
+        <p class="caption"><span class="no">FIG. 12</span>Running — first working prototype.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 FABRICATION -->
+<section id="fab">
+  <div class="divider reveal">
+    <div class="divider-inner">
+      <span class="divider-no">06</span>
+      <h2>Hands‑On Fabrication</h2>
+      <span class="divider-tag">UCLA Clubs</span>
+    </div>
+  </div>
+  <div class="sheet">
+    <div class="fab-grid reveal">
+      <div class="fab-cell">
+        <h3>Formula SAE — Chassis</h3>
+        <span class="fab-org">Chassis Subteam, Mk11 · Sept 2025 – Present</span>
+        <p>Designed and 3D‑printed welding jigs to position tabs on the Mk11 chassis, then welded a tab that supports part of the driver's seat — a small but structurally real contribution to a large team build.</p>
+      </div>
+      <div class="fab-cell">
+        <h3>Bruin Baja Racing — Welding</h3>
+        <span class="fab-org">Welding Subteam · Sept – Dec 2025</span>
+        <p>Trained on welding through UCLA's machine shop and welded alloy steel on the roll cage's engine bay — my first time welding anything, on a structure that actually had to hold up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="signoff reveal">
+    <div>
+      <h2>Let's build something.</h2>
+      <p>Open to mechanical engineering internships and co‑ops — structures, mechanisms, or manufacturing.</p>
+    </div>
+    <div class="signoff-links">
+      <a href="mailto:colbydelaura@gmail.com">colbydelaura@gmail.com</a>
+      <a href="#" onclick="return false;">Resume (PDF) — coming soon</a>
+    </div>
+  </div>
+  <div class="foot-meta">
+    <span>DELAURA — SHEET SET 01–06</span>
+    <span>RANCHO SANTA MARGARITA, CA</span>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  revealEls.forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
